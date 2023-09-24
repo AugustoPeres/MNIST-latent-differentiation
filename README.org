@@ -3,5 +3,18 @@
 This project is a visualization of differentiation on the latent space of an
 auto-encoder guided by a classifier to generate specific MNIST digits.
 
+Basically we have a trained classifier for the mnist dataset and an
+autoencoder. To generate any number that we want we randomly sample a point from
+the latent space, feed it to the decoder to obtain an image. That image is
+passed through the classifier. We differenttiate with respect to the point in
+the latent space to maximize the probability of the generated image being of the
+requested class. The process is repeated iteratively:
+
 #+CAPTION: Example visualizarion of the generation procedure.
 [[./readme_images/visualization.gif]]
+
+In the previous animation:
+
+We start (black point) in a point of the latent space for which the decoder
+generates a zero.  Over several iterations we move towards a point in the latent
+space for which the generator generates a 5 which was the requested number.
