@@ -1,0 +1,7 @@
+# Visualizing latent sapace differentiation on MNIST
+
+This project is a visualization of differentiation on the latent space of an
+auto-encoder guided by a classifier to generate specific MNIST digits.
+
+#+CAPTION: Example visualizarion of the generation procedure.
+[[./readme_images/visualization.gif]]
