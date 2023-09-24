@@ -18,3 +18,82 @@ In the previous animation:
 We start (black point) in a point of the latent space for which the decoder
 generates a zero.  Over several iterations we move towards a point in the latent
 space for which the generator generates a 5 which was the requested number.
+
+
+* Reproducing the code
+
+** Installing dependencies
+
+Create and activate a virtual env:
+
+#+begin_src bash
+python3 -m venv .env
+source .env/bin/activate
+#+end_src
+
+Install the requirements:
+
+#+begin_src bash
+pip install -r requirements.txt
+#+end_src
+
+** Training the classifier
+
+To train the classifier run:
+
+#+begin_src bash
+python train_classifier.py
+#+end_src
+
+You can change things like ~batch_size~, ~number_of_layers~ from the command
+line with, for example:
+
+#+begin_src bash
+python train_classifier.py --n_layers=10
+#+end_src
+
+For a complete description of the ~FLAGS~ use
+
+#+begin_src bash
+python train_classifier.py --help
+#+end_src
+
+*Note*: If you have a gpu available use ~use_gpu=True~.
+
+The last epoch model will be saved under ~classifier_logs/lightning_logs~
+
+** Train the autoencoder
+
+To train the autoencoder run:
+
+#+begin_src bash
+python train_autoencoder.py
+#+end_src
+
+At the end of training you will be prompted with several images displaying
+original images and reconstructions.
+
+The last epoch model will be saved under ~autoencoder_logs/lightning_logs~
+
+** Generate an image
+
+To generate an image run:
+
+#+begin_src bash
+python generate.py --classifier_checkpoint=<PATH to a trained classifier>\
+                   --autoencoder_checkpoint=<PATH to the autoencoder checkpoint>\
+                   --class_to_generate=<Number to generate>
+#+end_src
+
+There will be several output images corresponding to the generated process under
+~generated_images_{generated_class}_{learning_rate}_{seed}~. Where the ~{...}~
+represent flags that we can pass the script. Again, just run ~--help~ to get a
+full description of the flags.
+
+*Note*: The results are very sensitive to learning rate so playaround with it.
+
+
+
+
+
+
